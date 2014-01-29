@@ -242,4 +242,15 @@ asset.Rectangle.FilledStroked.prototype.draw = function(context) {
 	context.strokeStyle = tempStrokeStyle;
 };
 
+asset.Text = function (text, x, y, maxWidth) {
+	this.text = text;
+	this.x = x;
+	this.y = y
+	this.maxWidth = maxWidth;
+}
+
+asset.Text.prototype.draw = function(context) {
+	context.fillText(this.text, this.x, this.y, this.maxWidth);
+}
+
 module.exports = asset;
