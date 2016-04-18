@@ -1,5 +1,3 @@
-var $c = require('js-toolkit2/toolkit');
-
 var asset = {};
 
 /**
@@ -48,7 +46,7 @@ asset.Circle = {};
 asset.Circle.create = function(x, y, r, params) {
 
 	if (typeof(r) == 'undefined') {
-		throw 'missing radius';
+		throw new Error('missing radius');
 	}
 
 	if (typeof(params) == 'undefined') {
@@ -64,10 +62,9 @@ asset.Circle.create = function(x, y, r, params) {
 		} else if (hasFillStyle) {
 			return new asset.Circle.Filled(x, y, r, params.fillStyle);
 		} else {
-			throw 'misings params (either lineStyle or fillStyle or both';
+			throw new Error('misings params (either lineStyle or fillStyle or both');
 		}
 	}
-
 };
 
 asset.Circle.Default = function(x, y, r) {
@@ -161,14 +158,15 @@ asset.Rectangle.create = function(x, y, w, h, params) {
 		var hasLineStyle = 'lineStyle' in params;
 		var hasFillStyle = 'fillStyle' in params;
 
-		if (hasLineStyle && hasFillStyle)
+		if (hasLineStyle && hasFillStyle) {
 			return new asset.Rectangle.FilledStroked(x, y, w, h, params.lineStyle, params.fillStyle);
-		else if (hasLineStyle)
+		} else if (hasLineStyle) {
 			return new asset.Rectangle.Stroked(x, y, w, h, params.lineStyle);
-		else if (hasFillStyle)
+		} else if (hasFillStyle) {
 			return new asset.Rectangle.Filled(x, y, w, h, params.fillStyle);
-		else
-			throw "misings params (either lineStyle or fillStyle or both";
+		} else {
+			throw new Error('missings params (lineStyle, fillStyle or both)');
+		}
 	}
 
 };

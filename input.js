@@ -11,10 +11,11 @@ module.exports.KeyboardEventBuffer = KeyboardEventBuffer;
 module.exports.KeyboardPositionModifier2d = KeyboardPositionModifier2d;
 
 function KeyboardEventBuffer(element) {
-	if (element)
+	if (element) {
 		this._element = element;
-	else
+	} else {
 		this._element = window;
+	}
 
 	this._init();
 };
@@ -27,8 +28,9 @@ KeyboardEventBuffer.prototype._init = function () {
 	// each loop iteration we check the state of this array, cells that are marked as true, are "clicked"
 	this._keyFlags = [];
 
-	for (var i = 0; i < KEYCODES_LENGTH; i++)
+	for (var i = 0; i < KEYCODES_LENGTH; i++) {
 		this._keyFlags[i] = false;
+	}
 
 	this._onKeyDownToken = false;
 	this._onKeyUpToken = false;
@@ -65,14 +67,21 @@ function KeyboardPositionModifier2d(target, keyboardEventBuffer, params) {
 	this.target = target;
 	this.keyboardEventBuffer = keyboardEventBuffer;
 
-	if (!('north' in params))
-		throw 'missing north key definition';
-	if (!('east' in params))
-		throw 'missing east key definition';
-	if (!('south' in params))
-		throw 'missing south key definition';
-	if (!('west' in params))
-		throw 'missing west key definition';
+	if (!('north' in params)) {
+		throw new Error('missing north key definition');
+	}
+
+	if (!('east' in params)) {
+		throw new Error('missing east key definition');
+	}
+
+	if (!('south' in params)) {
+		throw new Error('missing south key definition');
+	}
+
+	if (!('west' in params)) {
+		throw new Error('missing west key definition');
+	}
 
 	this.params = params;
 };
