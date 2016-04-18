@@ -1,6 +1,6 @@
 # Layla
 
-A standalone micro animation lib for javascript.
+Old project, a standalone micro animation lib for javascript.
 
 ```javascript
     var layla = require('layla')
@@ -19,6 +19,10 @@ A standalone micro animation lib for javascript.
     }
 
 ```
+
+Based on
+http://nokarma.org/2011/02/02/javascript-game-development-the-game-loop/index.html
+http://www.koonsolo.com/news/dewitters-gameloop/
 
 TODO:
 full working example

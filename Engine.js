@@ -1,6 +1,7 @@
 /**
- * main engine, the main event loop is based on the wonderful article: http://nokarma.org/2011/02/02/javascript-game-development-the-game-loop/index.html, which i
- * suspect is based on http://www.koonsolo.com/news/dewitters-gameloop/
+ * main engine, the main event loop is based on the wonderful articles: 
+ * http://nokarma.org/2011/02/02/javascript-game-development-the-game-loop/index.html, 
+ * http://www.koonsolo.com/news/dewitters-gameloop/
  *
  * author: Yaniv Kessler (yaniv at codeark dot com)
  *
