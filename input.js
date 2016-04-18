@@ -3,7 +3,7 @@
  *
  * 	author: Yaniv Kessler (yaniv at codeark dot com)
  */
-var events = require('js-toolkit2/events');
+var events = require('./BrowserEvents.js');
 
 var KEYCODES_LENGTH = 255;
 

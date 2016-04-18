@@ -12,7 +12,7 @@ asset.SoundEffect = function(url, rate) {
 
 	// we need to create several audio containers so we can play multiple instances of the same sample
 	for (var i = 0; i < rate; i++) {
-		var audio = $c.createElement('audio');
+		var audio = _createElement('audio');
 		audio.src = url;
 		this.elements[i] = audio;
 	}
@@ -22,13 +22,15 @@ asset.SoundEffect.prototype.play = function() {
 
 	this.elements[this.current--].play();
 
-	if (this.current == 0)
+	if (this.current == 0) {
 		this.current = this.rate - 1;
+	}
 };
 
 // disable sound when not supported
-if (!$c.isAudioSupported())
+if (!_isAudioSupported()) {
 	asset.SoundEffect.prototype.play = function() {};
+}
 
 asset.Image = {};
 
@@ -45,8 +47,9 @@ asset.Circle = {};
  */
 asset.Circle.create = function(x, y, r, params) {
 
-	if (typeof(r) == 'undefined')
+	if (typeof(r) == 'undefined') {
 		throw 'missing radius';
+	}
 
 	if (typeof(params) == 'undefined') {
 		return new asset.Circle.Default(x, y, r);
@@ -54,14 +57,15 @@ asset.Circle.create = function(x, y, r, params) {
 		var hasLineStyle = 'lineStyle' in params;
 		var hasFillStyle = 'fillStyle' in params;
 
-		if (hasLineStyle && hasFillStyle)
+		if (hasLineStyle && hasFillStyle) {
 			return new asset.Circle.FilledStroked(x, y, r, params.lineStyle, params.fillStyle);
-		else if (hasLineStyle)
+		} else if (hasLineStyle) {
 			return new asset.Circle.Stroked(x, y, r, params.lineStyle);
-		else if (hasFillStyle)
+		} else if (hasFillStyle) {
 			return new asset.Circle.Filled(x, y, r, params.fillStyle);
-		else
+		} else {
 			throw 'misings params (either lineStyle or fillStyle or both';
+		}
 	}
 
 };
@@ -242,7 +246,7 @@ asset.Rectangle.FilledStroked.prototype.draw = function(context) {
 	context.strokeStyle = tempStrokeStyle;
 };
 
-asset.Text = function (text, x, y, maxWidth) {
+asset.Text = function(text, x, y, maxWidth) {
 	this.text = text;
 	this.x = x;
 	this.y = y
@@ -251,6 +255,32 @@ asset.Text = function (text, x, y, maxWidth) {
 
 asset.Text.prototype.draw = function(context) {
 	context.fillText(this.text, this.x, this.y, this.maxWidth);
+}
+
+function _createElement(tag, attrs, container) {
+	var element = document.createElement(tag);
+
+	for (var attr in attrs) {
+		element[attr] = attrs[attr];
+	}
+
+	// just create the element and return it, dont append it to anything
+	if (container === null) return element;
+
+	container = container || this.getDocumentBody();
+
+	if (container) {
+		container.appendChild(element);
+	} else {
+		this.log("could not add element to container");
+	}
+
+	return element;
+}
+
+function _isAudioSupported() {
+	var test_audio = _createElement('audio'); //try and create sample audio element
+	return (test_audio.play) ? true : false;
 }
 
 module.exports = asset;
